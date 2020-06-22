@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.algaworks.cobranca.model.StatusTitulo;
 import com.algaworks.cobranca.model.Titulo;
 import com.algaworks.cobranca.repository.Titulos;
 
@@ -15,7 +16,7 @@ public class CadastroTituloService {
 	
 	public void salvar(Titulo titulo) {
 		try {
-		titulosRepository.save(titulo);
+			titulosRepository.save(titulo);
 		} catch (DataIntegrityViolationException e) {
 			throw new IllegalArgumentException("Formato de data inválido");
 		}
@@ -23,5 +24,15 @@ public class CadastroTituloService {
 	
 	public void excluir(Long codigo) {
 		titulosRepository.delete(codigo);
+	}
+	
+	public String receber(Titulo titulo) {
+		try {
+			titulo.setStatus(StatusTitulo.RECEBIDO);
+			salvar(titulo);
+			return StatusTitulo.RECEBIDO.getDescricao();
+		} catch (DataIntegrityViolationException e) {
+			throw new IllegalArgumentException("Formato de data inválido");
+		}
 	}
 }

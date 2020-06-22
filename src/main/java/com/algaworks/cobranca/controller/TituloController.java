@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -56,8 +57,8 @@ public class TituloController {
 	}
 	
 	@RequestMapping
-	public ModelAndView pesquisar() {
-		List<Titulo> todosTitulos = titulos.findAll();
+	public ModelAndView pesquisar(@RequestParam(defaultValue = "%") String descricao) {
+		List<Titulo> todosTitulos = titulos.findByDescricaoContaining(descricao);
 		ModelAndView mv = new ModelAndView("PesquisaTitulos");
 		mv.addObject("titulos", todosTitulos);
 		return mv;
@@ -75,6 +76,12 @@ public class TituloController {
 		cadastroTituloService.excluir(id);
 		attibutes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
 		return "redirect:/titulos";
+	}
+	
+	//requisicao via ajax
+	@RequestMapping(value="/{id}/receber", method = RequestMethod.PUT)
+	public @ResponseBody String receber(@PathVariable("id") Titulo titulo) {
+		return cadastroTituloService.receber(titulo);
 	}
 	
 	@ModelAttribute("todosStatusTitulo")
