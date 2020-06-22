@@ -1,5 +1,7 @@
 D:\1 - Projetos\Algaworks\StartMVC\cobranca\src\main\java\com\algaworks\cobranca\controller\TituloController.java
+D:\1 - Projetos\Algaworks\StartMVC\cobranca\src\main\java\com\algaworks\cobranca\service\CadastroTituloService.java
 D:\1 - Projetos\Algaworks\StartMVC\cobranca\src\main\java\com\algaworks\cobranca\repository\Titulos.java
+D:\1 - Projetos\Algaworks\StartMVC\cobranca\src\main\java\com\algaworks\cobranca\repository\filter\TituloFilter.java
 D:\1 - Projetos\Algaworks\StartMVC\cobranca\src\main\java\com\algaworks\cobranca\CobrancaApplication.java
 D:\1 - Projetos\Algaworks\StartMVC\cobranca\src\main\java\com\algaworks\cobranca\ServletInitializer.java
 D:\1 - Projetos\Algaworks\StartMVC\cobranca\src\main\java\com\algaworks\cobranca\model\Titulo.java
